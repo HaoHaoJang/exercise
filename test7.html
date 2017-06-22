@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype.js</title>
+</head>
+<body>
+	<script type="text/javascript" src="prototype-1.7.js"></script>
+	<script type="text/javascript">
+		var People=Class.create({
+			initialize:function(name,age,sex){
+				this.name=name;
+				this.age=age;
+				this.sex=sex;
+			},
+			say:function(){
+				alert("您好，我是"+this.name+"今年"+this.age+"岁了"+"我是个"+this.sex+"生")
+			},
+			zhangyisui:function(){
+				this.age++;
+			},
+		});
+		
+
+
+		//子类
+		
+		var Student=Class.create(People, {
+			initialize:function($super,xuehao){
+				// $super(name,age,sex);
+				$super();
+				this.xuehao=xuehao;
+			},
+		});
+
+		var chenwei=new Student(38)
+		chenwei.say();
+		// var xiaoming=new People("小明",12,"男");
+		// xiaoming.zhangyisui();
+		// xiaoming.say();
+	</script>
+</body>
+</html>

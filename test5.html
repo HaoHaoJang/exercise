@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	canvas{
+		border:1px solid #ccc;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+<script type="text/javascript" src="underscore-min.js"></script>
+<script type="text/javascript">
+		// canvas.width="800px"
+		var canvas=document.getElementById("canvas");
+		var ctx=canvas.getContext("2d");
+		function Girl(x,y){
+			this.x=x;
+			this.y=y;
+			//自己在哪种步子上，合法值0、1、2、3；
+			this.state=0;
+		}
+
+		//小女孩原型
+		Girl.prototype={
+			update:function(){
+				this.state++;
+				this.x+=10;
+				if(this.state>3){
+					this.state=0;
+				}
+				
+			},
+			render:function(){
+				ctx.drawImage(game.image,96*this.state,96*2,96,96,this.x,this.y,96,96);
+			}
+		}
+
+		//游戏控制类
+		function Game(){
+			var self=this;
+			this.image=new Image();
+			this.image.src="1.png";
+		
+			this.image.onload=function(){
+					self.run();
+				}
+				this.girl=new Girl(100,100);
+				this.timer=null;
+		}
+		Game.prototype={
+			//主循环
+			mainloop : function(){
+				//具体的业务
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+				this.girl.update();
+				this.girl.render();
+			},
+			//开始循环
+			run:function(){
+				//备份this，因为setInterval中的this就是window了;
+				var self=this;
+				this.timer=setInterval(function () {
+					self.mainloop();
+				},150);
+
+			},
+			stop:function(){
+				clearInterval(this.timer);
+			}
+		}
+
+		var game=new Game();
+</script>
+</html>

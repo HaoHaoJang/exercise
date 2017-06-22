@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 原声写继承 -->
+	<!-- 恶心在两件事上 -->
+	<!-- （1）语句不在一个结构块里面，看着不爽 -->
+	<!-- （2）子、父类方法不明确. -->
+	<script type="text/javascript">
+		//人类
+		function People (name) {
+			this.name=name;
+		}
+
+		//人类的原型
+		People.prototype={
+			say:function  () {
+				alert("你好我是"+this.name);
+			}
+		}
+
+		//学生类，学生也是人，所以学生具有人的所有属性和方法
+		//也有自己特有的属性，比如学号
+		//也有自己特有的方法，比如学习。
+		//继承：我跟你一样，并且丰富了你。
+		function Student(name,xuehao){
+			this.name=name;
+			this.xuehao=xuehao;
+		}
+
+		//原型链。子类的原型，是父类的实例
+		Student.prototype=new People(name);
+		Student.prototype.study=function(){
+			alert("我要写作业了！");
+		}
+
+		var xiaoming=new Student("小明","123");
+		xiaoming.say();
+		xiaoming.study();
+	</script>
+</body>
+</html>

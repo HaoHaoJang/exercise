@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	canvas{
+		border:1px solid #ccc;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="500"></canvas>
+</body>
+<script type="text/javascript" src="underscore-min.js"></script>
+<script type="text/javascript">
+		// canvas.width="800px"
+		var canvas=document.getElementById("canvas");
+		var ctx=canvas.getContext("2d");
+		function Girl(x,y){
+			this.x=x;
+			this.y=y;
+			//自己在哪种步子上，合法值0、1、2、3；
+			this.state=0;
+		}
+
+		//小女孩原型
+		Girl.prototype={
+			update:function(){
+				this.state++;
+				this.x+=10;
+				if(this.state>3){
+					this.state=0;
+				}
+				
+			},
+			render:function(){
+				ctx.drawImage(image,96*this.state,96*2,96,96,this.x,this.y,96,96);
+			}
+		}
+		var image=new Image();
+		image.src="1.png";
+		image.onload=function(){
+			var girl=new Girl(100,100);
+			setInterval(function(){
+				ctx.clearRect(0,0,canvas.width,canvas.height)
+				girl.update();
+				girl.render();
+			},300)
+		}
+
+</script>
+</html>

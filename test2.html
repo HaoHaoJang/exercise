@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	canvas{
+		border:1px solid #ccc;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="500"></canvas>
+</body>
+<script type="text/javascript">
+		// canvas.width="800px"
+		var canvas=document.getElementById("canvas");
+		var ctx=canvas.getContext("2d");
+
+		//基本的面向对象制作动画
+
+		//首先，我们一定要知道canvas有一个哲学，就是做的少，就是做的多。
+		//所有绘制在canvas上的东西，会立即被栅格化。绘制了一个圆，但是再也得不到这个圆了。
+		//所以，如果想让一个小球移动，必须清除之前的小球，然后重新绘制一个新的。
+		//面向对象的本质，就是自治。让一个对象，管理好自己的事，那么所有的事就好了。
+		//面向对象，一定要知道，类要足够的鲁棒，高层对象（调用者）调用它的时候，不用去关心它的实现
+		//canvas动画中，一个角色，最最常见的是 update和render；
+		//
+		// ctx.beginPath();
+		// ctx.arc(100,100,50,0,2*Math.PI,true)
+		// ctx.fillStyle="skyblue";
+		// ctx.fill();
+		// ctx.closePath();
+		// var x=100;
+		// setInterval(function(){
+		// 	x++;
+		// 	ctx.clearRect(0,0,canvas.width,canvas.height);
+		// 	ctx.beginPath();
+		// 	ctx.arc(x,200,50,0,Math.PI*2,true);
+		// 	ctx.fillStyle="navy";
+		// 	ctx.fill();
+		// 	ctx.closePath();
+		// },20);
+		// 
+		
+		//小球类
+		function Ball(x,y,r,color,speed){
+			this.x=x;
+			this.y=y;
+			this.r=r;
+			this.color=color;
+			this.speed=speed;
+		}
+
+		//小球的原型
+	Ball.prototype={
+		//更新自己
+		update : function(){
+			this.x+=this.speed;
+		},
+
+		//渲染自己
+		render:function(){
+			//绘制圆的API
+			ctx.beginPath();
+			ctx.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+			ctx.fillStyle=this.color;
+			ctx.fill();
+		}
+	}
+	var b=new Ball(100,100,50,"red",1);
+	var b1=new Ball(200,200,40,"blue",2);
+	// b1.update=function(){
+	// 	this.x+=10;
+	// }
+	setInterval(function(){
+		//清除画布
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		//更新小球
+		b.update();
+		//渲染小球
+		b.render();
+		b1.update();
+		b1.render();
+
+	},20);
+
+	</script>
+</html>

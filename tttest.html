@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<form id="doSubmit" action="tttest_submit" method="post"  accept-charset="utf-8">
+		<tr>
+			<input type="text" name="a" value="11">
+		</tr>
+		<tr>
+			<input type="text" name="b" value="22">
+		</tr>
+		<tr>
+			<input type="text" name="c" value="33">
+		</tr>
+		<tr>
+		<input type="text" name="d" value="44">
+		</tr>
+	</form>
+	<button  onClick="Dosubmit()">提交</button>
+</body>
+<script type="text/javascript">
+function Dosubmit(){
+	alert(window.location)
+	alert("aaa")
+		var a=$("form").serialize();
+		console.log(a)
+}
+	
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		canvas{
+			border:1px solid #ccc;
+		}		
+	</style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="500"></canvas>
+</body>
+<script type="text/javascript">
+		var canvas=document.getElementById("canvas");
+		var ctx=canvas.getContext("2d");
+		var image=new Image();
+		//设置src，一旦设置src属性了，上行请求将发出。
+		image.src="logo12.png";
+		//
+		image.onload=function(){
+			ctx.drawImage(image,206,119,51,50,100,100,51,50);
+		}
+		
+</script>
+</html>

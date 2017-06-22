@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="simpleInheritance.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var People=Class.extend({
+			init:function(name,age,sex){
+				this.name=name;
+				this.age=age;
+				this.sex=sex;
+			},
+			say:function(){
+				alert("您好，我是"+this.name+"今年"+this.age+"岁了"+"我是个"+this.sex+"生")
+			},
+			zhangyisui:function(){
+				this.age++;
+			}
+		})
+
+		var Student=People.extend({
+			init:function(name,age,sex,xuehao){
+				this._super(name,age,sex,xuehao);
+				this.xuehao=xuehao;
+			},
+			say:function(){
+				this._super();
+				alert(this.xuehao);
+			},
+			study:function(){
+				alert("wo kai shi xuexi");
+			}
+		});
+		var chenwei=new Student("陈伟",12,"男",11111111111111111234567);
+		chenwei.zhangyisui();
+		chenwei.say();
+		chenwei.study();
+	</script>
+</body>
+</html>
